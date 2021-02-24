@@ -11,3 +11,7 @@ Text Domain:  GutenbergStarterChild
 */
 
 /* Write here your own personal stylesheet */
+
+body {
+  color: #000;
+}
