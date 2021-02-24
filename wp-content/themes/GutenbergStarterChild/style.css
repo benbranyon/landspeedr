@@ -23,3 +23,7 @@ body {
 .site-header {
   color: #fff;
 }
+
+.home .entry-title {
+  display: none;
+}
