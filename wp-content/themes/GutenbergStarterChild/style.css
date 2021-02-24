@@ -28,6 +28,14 @@ body {
   display: none;
 }
 
+a {
+  color: #fff;
+}
+
+a::hover {
+  color: #fff;
+}
+
 p {
   color: #fff;
   font-size: 18px;
