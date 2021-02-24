@@ -19,3 +19,7 @@ body {
 .header-bg {
   background-color: #000;
 }
+
+.site-header {
+  color: #fff;
+}
