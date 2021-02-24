@@ -32,8 +32,9 @@ a {
   color: #fff;
 }
 
-a::hover {
+a:hover {
   color: #fff;
+  text-decoration: none;
 }
 
 p {
