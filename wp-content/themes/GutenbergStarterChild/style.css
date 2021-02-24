@@ -27,3 +27,8 @@ body {
 .home .entry-title {
   display: none;
 }
+
+p {
+  color: #fff;
+  font-size: 18px;
+}
