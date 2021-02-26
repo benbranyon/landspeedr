@@ -23,6 +23,7 @@ if ( ! function_exists( 'suffice_child_enqueue_child_styles' ) ) {
 	      get_stylesheet_directory_uri() . '/style.css'
 	    );
 	    wp_enqueue_style( 'childe2-style');
+	    wp_enqueue_script( 'three', get_stylesheet_directory_uri() . '/js/libraries/three.min.js', array('jquery'), '20151215', true );
 	 }
 }
 add_action( 'wp_enqueue_scripts', 'GutenbergStarterChild_enqueue_child_styles' );
