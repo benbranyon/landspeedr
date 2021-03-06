@@ -6,7 +6,7 @@ const radius = 100;
 
 // Click handlers
 function objectClickHandler() {
-    var link = "#"
+    var link = "/architecture-of-surveillance-landing/"
     window.location.href = link;
 }
 
@@ -16,7 +16,7 @@ function objectClickHandler2() {
 }
 
 function objectClickHandler3() {
-    var link = "#"
+    var link = "/architecture-of-surveillance-landing/"
     window.location.href = link;
 }
 
