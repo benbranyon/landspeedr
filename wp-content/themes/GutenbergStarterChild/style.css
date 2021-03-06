@@ -17,7 +17,7 @@ body {
 }
 
 .header-bg {
-  background-color: #000;
+  background-color: #0a0a0a;
 }
 
 .site-header {
@@ -40,4 +40,10 @@ a:hover {
 p {
   color: #fff;
   font-size: 18px;
+}
+
+#scene-container {
+  background-color: #fff;
+  height: 800px;
+  width: 100%;
 }
