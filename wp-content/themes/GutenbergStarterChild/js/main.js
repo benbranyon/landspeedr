@@ -4,9 +4,20 @@ var maxRotation = 4 * Math.PI;
 let theta = 0;
 const radius = 100;
 
-// Default click handler for our three.js objects
+// Click handlers
 function objectClickHandler() {
-    window.location.href('#');
+    var link = "#"
+    window.location.href = link;
+}
+
+function objectClickHandler2() {
+    var link = "/architecture-of-surveillance-landing/"
+    window.location.href = link;
+}
+
+function objectClickHandler3() {
+    var link = "#"
+    window.location.href = link;
 }
 
 function onWindowResize() {
@@ -23,11 +34,14 @@ function init() {
     camera.position.z = 300;
 
     scene = new THREE.Scene();
-    scene.background = new THREE.Color( 0x000000 );
+    //scene.background = new THREE.Color( 0x000000, 0 );
 
     const light = new THREE.DirectionalLight( 0xffffff, 1 );
-    light.position.set( 1, 1, 1 ).normalize();
+    light.position.set( 1, 100, 1 ).normalize();
     scene.add( light );
+
+    //var lightAmb = new THREE.AmbientLight(0x777777);
+    //scene.add(lightAmb);
     
     var material = new THREE.MeshPhongMaterial({
       color: 0x2194ce,
@@ -35,6 +49,19 @@ function init() {
       shininess: 50,
       wireframe: true
     });
+
+    var material2 = new THREE.MeshPhongMaterial({
+      color: 0x2194ce,
+      specular: 0x111111,
+      shininess: 50,
+    });
+
+    const texture = new THREE.TextureLoader().load( '/wp-content/themes/GutenbergStarterChild/assets/textures/earth-lights-texture.png' );
+
+    var material3 = new THREE.MeshPhongMaterial({
+      map: texture,      
+    });
+
     var objectSize = 100;
     
     // Create a cube
@@ -45,26 +72,26 @@ function init() {
 
     // create a sphere
     var sphereGeometry = new THREE.SphereGeometry( objectSize / 2, 32, 32 );
-    mesh = new THREE.Mesh(sphereGeometry, material);
+    mesh = new THREE.Mesh(sphereGeometry, material2);
     mesh.position.set(objectSize * -2, 0, 0);
     //mesh.position.x = Math.random() * 500 - 400;
     //mesh.position.y = Math.random() * 500 -400;
     //mesh.position.z = Math.random() * 500 - 400;
     mesh.callback = objectClickHandler;
 
-    mesh2 = new THREE.Mesh(sphereGeometry, material);
+    mesh2 = new THREE.Mesh(sphereGeometry, material3);
     mesh2.position.set(0, 0, 0);
     //mesh2.position.x = Math.random() * 800 - 400;
     //mesh2.position.y = Math.random() * 800 -400;
     //mesh2.position.z = Math.random() * 800 - 400;
-    mesh2.callback = objectClickHandler;
+    mesh2.callback = objectClickHandler2;
 
     mesh3 = new THREE.Mesh(sphereGeometry, material);
     mesh3.position.set(objectSize, 0, 0);
     //mesh3.position.x = Math.random() * 800 - 400;
     //mesh3.position.y = Math.random() * 800 -400;
     //mesh3.position.z = Math.random() * 800 - 400;
-    mesh3.callback = objectClickHandler;
+    mesh3.callback = objectClickHandler3;
 
     // create a cylinder
     //var cylinderGeometry = new THREE.CylinderGeometry( objectSize / 4, objectSize / 4, 64, 32 );
