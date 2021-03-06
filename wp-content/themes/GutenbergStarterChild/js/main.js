@@ -1,6 +1,8 @@
 // three.js variables
 var mesh, mesh2, mesh3, camera, scene, renderer;
 var maxRotation = 4 * Math.PI;
+let theta = 0;
+const radius = 100;
 
 // Default click handler for our three.js objects
 function objectClickHandler() {
@@ -21,6 +23,11 @@ function init() {
     camera.position.z = 300;
 
     scene = new THREE.Scene();
+    scene.background = new THREE.Color( 0x000000 );
+
+    const light = new THREE.DirectionalLight( 0xffffff, 1 );
+    light.position.set( 1, 1, 1 ).normalize();
+    scene.add( light );
     
     var material = new THREE.MeshPhongMaterial({
       color: 0x2194ce,
@@ -31,30 +38,47 @@ function init() {
     var objectSize = 100;
     
     // Create a cube
-    var boxGeometry = new THREE.BoxGeometry(objectSize, objectSize, objectSize);
-    mesh = new THREE.Mesh(boxGeometry, material);
-    mesh.position.set(objectSize * -2, 0, 0);
-    mesh.callback = objectClickHandler;
+    //var boxGeometry = new THREE.BoxGeometry(objectSize, objectSize, objectSize);
+    //mesh = new THREE.Mesh(boxGeometry, material);
+    //mesh.position.set(objectSize * -2, 0, 0);
+    //mesh.callback = objectClickHandler;
 
     // create a sphere
     var sphereGeometry = new THREE.SphereGeometry( objectSize / 2, 32, 32 );
+    mesh = new THREE.Mesh(sphereGeometry, material);
+    mesh.position.set(objectSize * -2, 0, 0);
+    //mesh.position.x = Math.random() * 500 - 400;
+    //mesh.position.y = Math.random() * 500 -400;
+    //mesh.position.z = Math.random() * 500 - 400;
+    mesh.callback = objectClickHandler;
+
     mesh2 = new THREE.Mesh(sphereGeometry, material);
     mesh2.position.set(0, 0, 0);
+    //mesh2.position.x = Math.random() * 800 - 400;
+    //mesh2.position.y = Math.random() * 800 -400;
+    //mesh2.position.z = Math.random() * 800 - 400;
     mesh2.callback = objectClickHandler;
 
-    // create a cylinder
-    var cylinderGeometry = new THREE.CylinderGeometry( objectSize / 4, objectSize / 4, 64, 32 );
-    mesh3 = new THREE.Mesh(cylinderGeometry, material);
-    mesh3.position.set(objectSize * 2, 0, 0);
+    mesh3 = new THREE.Mesh(sphereGeometry, material);
+    mesh3.position.set(objectSize, 0, 0);
+    //mesh3.position.x = Math.random() * 800 - 400;
+    //mesh3.position.y = Math.random() * 800 -400;
+    //mesh3.position.z = Math.random() * 800 - 400;
     mesh3.callback = objectClickHandler;
+
+    // create a cylinder
+    //var cylinderGeometry = new THREE.CylinderGeometry( objectSize / 4, objectSize / 4, 64, 32 );
+    //mesh3 = new THREE.Mesh(cylinderGeometry, material);
+    //mesh3.position.set(objectSize * 2, 0, 0);
+    //mesh3.callback = objectClickHandler;
 
     scene.add(mesh);
     scene.add(mesh2);
     scene.add(mesh3);
 
     renderer = new THREE.WebGLRenderer({
-            alpha: true
-        });
+        alpha: true
+    });
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(container.clientWidth, container.clientHeight);
     container.appendChild(renderer.domElement);
@@ -66,10 +90,17 @@ function animate() {
     requestAnimationFrame(animate);
 
     mesh.rotation.y = (mesh.rotation.y + 0.005) % maxRotation;
-    mesh2.rotation.y = (mesh2.rotation.y + 0.005) % maxRotation;
-    mesh2.rotation.x = (mesh2.rotation.x + 0.005) % maxRotation;
+    mesh2.rotation.y = (mesh2.rotation.x + 0.005) % maxRotation;
     mesh3.rotation.y = (mesh3.rotation.y + 0.005) % maxRotation;
     mesh3.rotation.x = (mesh3.rotation.x + 0.005) % maxRotation;
+
+    theta += 0.2;
+    camera.position.x = radius * Math.sin( THREE.MathUtils.degToRad( theta ) );
+    camera.position.y = radius * Math.sin( THREE.MathUtils.degToRad( theta ) );
+    camera.position.z = radius * Math.cos( THREE.MathUtils.degToRad( theta ) );
+    camera.lookAt( scene.position );
+
+    camera.updateMatrixWorld();
     
     renderer.render(scene, camera);
 }
